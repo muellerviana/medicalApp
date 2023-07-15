@@ -1,5 +1,5 @@
 class ConsumersController < ApplicationController
-  before_action :set_consumer, only: %i[ show ]
+  before_action :set_consumer, only: %i[ show update destroy]
 
   def index
     @consumers = Consumer.all
@@ -19,6 +19,20 @@ class ConsumersController < ApplicationController
     else
       render jason: @consumer.errors, status: 200
     end
+  end
+
+  def update
+    if @consumer.update(consumer_params)
+      render json: @consumer
+    else
+      render json: @consumer.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @consumer.destroy 
+
+    render json: "The consumer #{@consumer.name} was deleted"
   end
 
   private
