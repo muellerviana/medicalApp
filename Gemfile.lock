@@ -70,6 +70,7 @@ GEM
       msgpack (~> 1.2)
     bson (4.15.0)
     builder (3.2.4)
+    byebug (11.1.3)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
     date (3.3.3)
@@ -166,6 +167,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  byebug
   debug
   mongoid
   puma (~> 5.0)
