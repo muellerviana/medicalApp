@@ -17,7 +17,7 @@ class ConsumersController < ApplicationController
     if @consumer.save
       render json: @consumer   
     else
-      render jason: @consumer.errors, status: 200
+      render json: @consumer.errors, status: 200
     end
   end
 
