@@ -1,4 +1,6 @@
 class DoctorsController < ApplicationController
+  before_action :set_doctor, only: %i[ show update destroy]
+
   def index
     @doctors = Doctor.all
 
@@ -6,8 +8,6 @@ class DoctorsController < ApplicationController
   end
 
   def show
-    @doctor = Doctor.find(params[:id])
-
     render json: @doctor
   end
 
@@ -21,7 +21,25 @@ class DoctorsController < ApplicationController
     end
   end
 
+  def update
+    if @doctor.update(doctor_params)
+      render json: @doctor
+    else
+      render json: @doctor.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @doctor.destroy 
+
+    render json: "The doctor was deleted"
+  end
+
   private
+
+  def set_doctor 
+    @doctor = Doctor.find(params[:id])
+  end
 
   def doctor_params
     params.require(:doctor)
